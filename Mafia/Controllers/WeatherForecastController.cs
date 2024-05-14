@@ -1,3 +1,4 @@
+using Mafia.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Mafia.Controllers

@@ -1,4 +1,4 @@
-namespace Mafia
+namespace Mafia.Models
 {
     public class WeatherForecast
     {

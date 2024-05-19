@@ -1,0 +1,29 @@
+stages:
+  - build
+  - deploy
+  
+build-job:
+  tags:
+    - ambprod
+  rules:
+    - if: '$CI_COMMIT_REF_NAME == "production"'
+  stage: build
+  script:
+    #- echo "Compiling the code..."
+    - "sudo -S <<< $ROOT_PASS_PROD /home/gitlab-runner/.dotnet/dotnet publish"
+    - "sudo -S <<< $ROOT_PASS_PROD rm -r /var/www/amb/ambulatorycard/"
+    - "sudo -S <<< $ROOT_PASS_PROD cp -r /home/gitlab-runner/builds/8kAZBFNZ/0/reginmanDragon/ambulatorycard/ /var/www/amb/"
+    - "sudo -S <<< $ROOT_PASS_PROD chown -R gitlab-runner:gitlab-runner /home/gitlab-runner/builds/8kAZBFNZ/0/reginmanDragon"
+    #- echo "Compile complete."
+
+deploy-job: 
+  tags:
+    - ambprod
+  rules:
+    - if: '$CI_COMMIT_REF_NAME == "production"'
+  stage: deploy
+  script: 
+    - bash notifes.sh
+    - "sudo -S <<< $ROOT_PASS_PROD systemctl restart ambultest.service"
+    - bash notify.sh
+  #environment: test

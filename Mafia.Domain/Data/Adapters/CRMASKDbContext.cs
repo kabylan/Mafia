@@ -1,6 +1,7 @@
 ﻿using Mafia.Application.AutoAudit;
 using Mafia.Domain.AutoAudit;
 using Mafia.Domain.Entities;
+using Mafia.Domain.Entities.Game;
 using Mafia.Domain.Entities.Privilegios;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -157,9 +158,9 @@ namespace Mafia.Domain.Data.Adapters
 
         #region DBset
 
-        
 
-        #endregion 
+
+        #endregion
 
         public DbSet<Country> Countries { get; set; }
         public DbSet<Organisation> Organisations { get; set; }
@@ -175,6 +176,10 @@ namespace Mafia.Domain.Data.Adapters
         #endregion 
 
         public DbSet<Log> Logs { get; set; }
+        public DbSet<Room> Rooms { get; set; }
+        public DbSet<RoomPlayer> RoomPlayers { get; set; }
+        public DbSet<RoomStage> RoomStages { get; set; }
+        public DbSet<RoomStagePlayer> RoomStagePlayers { get; set; }
         public DbSet<AuditRecord> AuditRecords { get; set; }
 
 

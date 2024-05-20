@@ -52,39 +52,5 @@ namespace Mafia.WebApi.Controllers
             _logger.LogInformation($"login: {authorize.Login} successfull");
             return Ok(records);
         }
-
-       
-
-        /// <summary>
-        /// Вывод привелегий
-        /// </summary>
-        [HttpPost]
-        [Route("GetPrivilegios")]
-        [Authorize(AuthenticationSchemes = "Bearer")]
-        public async Task<IActionResult> GetPrivilegios(string userName)
-        {
-            var records = await _accountService.GetPrivilegios(userName);
-            return Ok(records);
-        }
-
-        /// <summary>
-        /// ...
-        /// </summary>
-        [ApiExplorerSettings(IgnoreApi = true)]
-        [NonAction]
-        public async Task<bool> CheckUserAsync(UserInfoForAuth user)
-        {
-            var records = await _accountService.CheckUserAsync(user);
-            return records;
-        }
-
-        /// <summary>
-        /// ...
-        /// </summary>
-        private async Task<ClaimsIdentity> GetIdentityAsync(string login, string password)
-        {
-            var records = await _accountService.GetIdentityAsync(login, password);
-            return records;
-        }
     }
 }

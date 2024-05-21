@@ -192,6 +192,7 @@ builder.Services.AddControllersWithViews()
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
+builder.Services.AddSignalR();
 //builder.Services.AddSession(options =>
 //{
 //    options.Cookie.Name = ".AdventureWorks.Session";
@@ -241,10 +242,12 @@ app.UseForwardedHeaders();
 app.UseRouting();
 
 app.UseAuthentication();
+app.UseWebSockets();
 app.UseAuthorization();
 
 app.UseEndpoints(endpoints =>
 {
+    endpoints.MapHub<ChatHub>("/chatHub");
     endpoints.MapControllerRoute(
         name: "default",
         pattern: "{controller=Home}/{action=Index}/{id?}");
